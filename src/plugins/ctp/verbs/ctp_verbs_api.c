@@ -2364,6 +2364,8 @@ static void verbs_destroy_conn(cci__ep_t *ep, cci__conn_t *conn)
 		}
 	}
 
+	rdma_destroy_ep(vconn->id);
+
 	pthread_rwlock_wrlock(&vep->conn_tree_lock);
 	tdelete(&vconn->qp_num, &vep->conn_tree, verbs_compare_u32);
 	pthread_rwlock_unlock(&vep->conn_tree_lock);
